@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+
+<GridPane fx:id="gridPane1" alignment="CENTER" hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" vgap="10.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ConvController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+      <ColumnConstraints minWidth="10.0" prefWidth="62.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <Label text="Convert RTI 2 RTO">
+         <font>
+            <Font name="Georgia" size="24.0" />
+         </font>
+      </Label>
+      <Separator prefWidth="200.0" GridPane.rowIndex="1" />
+      <Label text="Directory with RTI" GridPane.rowIndex="2" />
+      <TextField fx:id="browseRtiDirTextField1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <Button fx:id="browseRtiDirButton1" mnemonicParsing="false" onAction="#BrowseRtiDirectory" text="Browse..." GridPane.columnIndex="2" GridPane.rowIndex="2" />
+      <Label text="Tables Format" GridPane.rowIndex="3" />
+      <ChoiceBox fx:id="tablesRtiFormatChoiceBox1" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <Button fx:id="convertButton1" mnemonicParsing="false" onAction="#StartConverting" prefHeight="25.0" prefWidth="206.0" text="Convert!" GridPane.rowIndex="4" />
+   </children>
+</GridPane>
