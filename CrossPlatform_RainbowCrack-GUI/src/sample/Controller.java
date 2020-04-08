@@ -48,7 +48,6 @@ public class Controller {
     public ArrayList<String> hashes = new ArrayList<>();
 
     public void MenuItemClose_Click(ActionEvent actionEvent) {
-        System.out.println();
         System.exit(0);
     }
 
@@ -163,6 +162,7 @@ public class Controller {
         String filesep = System.getProperty("file.separator");
         String linesep = System.getProperty("line.separator");
 
+        //for debug
         Alert osAlert = new Alert(Alert.AlertType.INFORMATION, "All about your system:\n\n" +
                         osname + " ver. " + osver + ", architecture - " + osarch + "\n" +
                         "file separator - \"" + filesep + "\", line separator in text files - \"" + linesep + "\"",
@@ -205,18 +205,12 @@ public class Controller {
                     filename = zen.getName();
                     filesize = zen.getSize();
 
-                    System.out.println(zen.isDirectory());
-
                     if (!zen.isDirectory()) {
 
-                        //File parentDest = new File(newPath, filename).getParentFile();
-                        File parentDest = new File(filename);
-                        parentDest.mkdirs();
+                        System.out.println("Unpacking " + filename + ", size: " + filesize + "b");
 
-                        File f1 = new File(filename);
-                        f1.createNewFile();
-                        f1.setReadable(true);
-                        f1.setWritable(true);
+                        File parentDest = new File(filename).getParentFile();
+                        parentDest.mkdirs();
                         FileOutputStream fout = new FileOutputStream(filename);
                         for (int c = zin.read(); c != -1; c = zin.read()) {
                             fout.write(c);
@@ -225,8 +219,6 @@ public class Controller {
                         zin.closeEntry();
                         fout.close();
                     }
-
-                    System.out.println("Unpacking " + filename + ", size: " + filesize + "b");
                 }
                 zin.close();
 
