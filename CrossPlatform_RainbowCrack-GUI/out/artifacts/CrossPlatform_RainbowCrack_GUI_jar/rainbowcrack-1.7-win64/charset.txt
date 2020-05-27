@@ -1,0 +1,24 @@
+
+numeric                  = [0123456789]
+
+alpha                    = [ABCDEFGHIJKLMNOPQRSTUVWXYZ]
+alpha-space              = [ABCDEFGHIJKLMNOPQRSTUVWXYZ]
+alpha-numeric            = [ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789]
+alpha-numeric-space      = [ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ]
+
+loweralpha               = [abcdefghijklmnopqrstuvwxyz]
+loweralpha-space         = [abcdefghijklmnopqrstuvwxyz]
+loweralpha-numeric       = [abcdefghijklmnopqrstuvwxyz0123456789]
+loweralpha-numeric-space = [abcdefghijklmnopqrstuvwxyz0123456789 ]
+
+mixalpha                 = [abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ]
+mixalpha-space           = [abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ]
+mixalpha-numeric         = [abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789]
+mixalpha-numeric-space   = [abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ]
+
+ascii-32-95                  = [ !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~]
+ascii-32-65-123-4            = [ !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`{|}~]
+alpha-numeric-symbol32-space = [ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_+=~`[]{}|\:;"'<>,.?/ ]
+
+all-space = [ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_+=~`[]{}|\:;"'<>,.?/ ]
+lm-frt-cp437-850 = [ !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`{|}~ÇÄÅÉÆÖÜ¢£Ø₧ƒÑÁÂÀ¢¥Ã¤ÐÊËÈıÍÎÏÌÓßÔÒΣÕµτÞÚÛÙÝε´]

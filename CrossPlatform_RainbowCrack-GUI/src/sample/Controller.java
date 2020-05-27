@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import java.awt.*;
 import java.io.*;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.zip.*;
 
@@ -145,7 +146,7 @@ public class Controller {
     }
 
     public void RtiConverting(ActionEvent actionEvent) throws IOException {
-        GridPane rtiwindow = FXMLLoader.load(getClass().getResource("rticonv.fxml"));
+        BorderPane rtiwindow = FXMLLoader.load(getClass().getResource("rticonv.fxml"));
         Scene rticonvScene = new Scene(rtiwindow, 450, 160);
         Stage newWindow = new Stage();
 
@@ -172,24 +173,41 @@ public class Controller {
         osAlert.showAndWait();
 
         try {
-            File f =
-                        (SysInfo.GetOperatingSystem() == "windows") && (SysInfo.GetSystemArchitecture() == 64) ?
-                            new File("resources/rainbowcrack-1.7-win64.zip") :
-                        (SysInfo.GetOperatingSystem() == "windows") && (SysInfo.GetSystemArchitecture() == 32) ?
-                            new File("resources/rainbowcrack-1.6.1-win32.zip") :
-                        ((SysInfo.GetOperatingSystem() == "linux") || (SysInfo.GetOperatingSystem() == "unix"))
-                        && (SysInfo.GetSystemArchitecture() == 64) ?
-                            new File("resources/rainbowcrack-1.7-linux64.zip") :
-                        ((SysInfo.GetOperatingSystem() == "linux") || (SysInfo.GetOperatingSystem() == "unix"))
-                        && (SysInfo.GetSystemArchitecture() == 32) ?
-                            new File("resources/rainbowcrack-1.6.1-linux32.zip") :
-                        (SysInfo.GetOperatingSystem() == "mac") ?
-                            null : null;
+
+            String rcrackArchiveFilename =
+                    (SysInfo.GetOperatingSystem() == "windows") && (SysInfo.GetSystemArchitecture() == 64) ?
+                        "rainbowcrack-1.7-win64.zip" :
+                    (SysInfo.GetOperatingSystem() == "windows") && (SysInfo.GetSystemArchitecture() == 32) ?
+                        "rainbowcrack-1.6.1-win32.zip" :
+                    ((SysInfo.GetOperatingSystem() == "linux") || (SysInfo.GetOperatingSystem() == "unix"))
+                    && (SysInfo.GetSystemArchitecture() == 64) ?
+                        "rainbowcrack-1.7-linux64.zip" :
+                    ((SysInfo.GetOperatingSystem() == "linux") || (SysInfo.GetOperatingSystem() == "unix"))
+                    && (SysInfo.GetSystemArchitecture() == 32) ?
+                        "rainbowcrack-1.6.1-linux32.zip" :
+                    (SysInfo.GetOperatingSystem() == "mac") ?
+                        null : null;
 
             ZipInputStream zin = null;
+            if (rcrackArchiveFilename != null) {
+                System.out.println(getClass().getResource("/resources/" + rcrackArchiveFilename));
+                System.out.println(
+                        getClass().getResourceAsStream(
+                                "/resources/" + rcrackArchiveFilename));
 
-            if (f != null) {
-                zin = new ZipInputStream(new FileInputStream(f.getAbsolutePath()));
+                //extracting zip from jar
+                InputStream jar_is = getClass().getResourceAsStream(
+                        "/resources/" + rcrackArchiveFilename);
+                OutputStream zip_from_jar = new FileOutputStream(rcrackArchiveFilename);
+                byte[] buf = new byte[1024];
+                int len;
+                while ((len = jar_is.read(buf)) > 0) {
+                    zip_from_jar.write(buf, 0, len);
+                }
+                jar_is.close();
+                zip_from_jar.close();
+
+                zin = new ZipInputStream(new FileInputStream(rcrackArchiveFilename));
             }
 
             if (zin != null) {
@@ -197,7 +215,8 @@ public class Controller {
                 String filename;
                 long filesize;
 
-                String newPath = f.getAbsolutePath().substring(0, f.getAbsolutePath().length() - 4);
+                String newPath = rcrackArchiveFilename.substring(
+                        0, rcrackArchiveFilename.length() - 4);
                 new File(newPath).mkdir();
 
                 while ((zen = zin.getNextEntry()) != null) {
@@ -224,12 +243,25 @@ public class Controller {
 
                 System.out.println("Done!");
                 System.out.println();
+
+                //reading rcrack
+                ProcessBuilder pb = new ProcessBuilder(
+                        rcrackArchiveFilename.substring(0, rcrackArchiveFilename.length() - 4) +
+                                  "rcrack.exe");
+                Process p = pb.start();
+                InputStreamReader rcrack_ins = new InputStreamReader(p.getInputStream());
+                BufferedReader rcrack_br = new BufferedReader(rcrack_ins);
+                String line = "";
+                while ((line = rcrack_br.readLine()) != null) {
+                    //code
+                }
+
             }
             else {
-                System.out.println("RainbowCrack does not supporting on your OS.");
+                System.out.println("RainbowCrack does not supported in your OS.");
             }
         }
-        catch (IOException ex) {
+        catch (IOException | NullPointerException ex) {
             System.out.println(ex);
             Alert alert = new Alert(Alert.AlertType.ERROR, String.valueOf(ex), ButtonType.OK);
             alert.setTitle("Error - IOException");
