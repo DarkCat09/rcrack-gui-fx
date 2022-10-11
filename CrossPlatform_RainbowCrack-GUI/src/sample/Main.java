@@ -18,10 +18,10 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-        System.out.println();
-        System.out.println("--- RainbowCrack Cross-Platform Java GUI 1.0 ---");
-        System.out.println("--- by Chechkenev Andrew (DarkCat09/CodePicker13)");
-        System.out.println();
+        //System.out.println();
+        //System.out.println("--- RainbowCrack Java GUI v1.0 ---");
+        //System.out.println("---------- by DarkCat09 ----------");
+        //System.out.println();
         launch(args);
     }
 }
